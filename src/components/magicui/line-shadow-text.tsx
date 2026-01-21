@@ -27,7 +27,7 @@ export function LineShadowText({
       style={
         {
           "--shadow-color": shadowColor,
-          color: "#155dfc",
+          color: "#be39dc",
         } as React.CSSProperties
       }
       className={cn(

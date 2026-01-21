@@ -1,293 +1,96 @@
-import {
-  Book,
-  CirclePoundSterling,
-  Menu,
-  Sunset,
-  Trees,
-  Zap,
-  Check,
-  Star,
-  TrendingUp,
-  Shield,
-  Clock,
-  Users,
-  ArrowRight,
-  Play,
-} from "lucide-react";
+"use client";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+import { useState } from "react";
+import Link from "next/link";
+import { Menu } from "lucide-react";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
-interface MenuItem {
-  title: string;
-  url: string;
-  description?: string;
-  icon?: React.ReactNode;
-  items?: MenuItem[];
-}
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
 
-interface Navbar1Props {
-  logo?: {
-    url: string;
-    src: string;
-    alt: string;
-    title: string;
+  const menuItems = [
+    { title: "Home", url: "#herosection" },
+    { title: "About Us", url: "#about" },
+    { title: "Services", url: "#services" },
+    { title: "Testimonials", url: "#testimonials" },
+    { title: "Contact", url: "#contact" },
+  ];
+
+  // Function for smooth scroll with offset
+  const handleScroll = (e: React.MouseEvent, target: string) => {
+    e.preventDefault();
+    const section = document.querySelector(target);
+    if (section) {
+      const navbarHeight = 5; // slightly thinner navbar height
+      const sectionTop =
+        section.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top: sectionTop, behavior: "smooth" });
+    }
+    setOpen(false);
   };
-  menu?: MenuItem[];
-  auth?: {
-    login: {
-      title: string;
-      url: string;
-    };
-    signup: {
-      title: string;
-      url: string;
-    };
-  };
-}
 
-const Navbar = ({
-  logo = {
-    url: "/",
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
-    alt: "logo",
-    title: "Credo",
-  },
-  menu = [
-    { title: "Home", url: "#" },
-    {
-      title: "Features",
-      url: "#",
-      items: [
-        {
-          title: "Fast Invoicing",
-          description: "Create and send invoices in seconds.",
-          icon: <Book className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Get Paid On Time",
-          description: "No more awkward follow-ups.",
-          icon: <Trees className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Track Payments",
-          description: "See who paid, instantly.",
-          icon: <Sunset className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Support",
-          description: "We're here if you need us.",
-          icon: <Zap className="size-5 shrink-0" />,
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Pricing",
-      url: "#pricing",
-    },
-    {
-      title: "Blog",
-      url: "#",
-    },
-  ],
-  auth = {
-    login: { title: "Login", url: "#" },
-    signup: { title: "Try Credo Free", url: "#" },
-  },
-}: Navbar1Props) => {
   return (
-    <>
-      {/* Navbar Section */}
-      <section className="py-4 sticky top-0 z-50 bg-background ">
-        <div className="container max-w-6xl items-center mx-auto ">
-          {/* Desktop Menu */}
-          <nav className="hidden justify-between lg:flex">
-            <div className="flex items-center gap-6">
-              {/* Logo */}
-              <a href={logo.url} className="flex items-center gap-2">
-                <CirclePoundSterling className="text-blue-500 size-6" />
-                <span className="text-lg font-semibold tracking-tighter">
-                  {logo.title}
-                </span>
-              </a>
-              <div className="flex items-center">
-                <NavigationMenu>
-                  <NavigationMenuList>
-                    {menu.map((item) => renderMenuItem(item))}
-                  </NavigationMenuList>
-                </NavigationMenu>
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <Button asChild variant="outline" size="sm" className="w-32 h-10">
-                <a href={auth.login.url}>{auth.login.title}</a>
-              </Button>
-              <Button asChild size="sm" className="w-32 h-10">
-                <a href={auth.signup.url}>{auth.signup.title}</a>
-              </Button>
-            </div>
-          </nav>
+    <header className="sticky top-0 z-50 bg-white shadow-md">
+      <div className="container mx-auto flex items-center justify-between py-1 px-3">
+        {/* Logo */}
+        <Link
+          href="#hero"
+          onClick={(e) => handleScroll(e, "#hero")}
+          className="flex items-center -my-2"
+        >
+          <img
+            src="https://res.cloudinary.com/dqksqtluq/image/upload/v1759537067/ChatGPT_Image_Oct_3_2025_07_17_33_PM_uf1fo1.png"
+            alt="Dra. G Clínica Odontológica"
+            className="h-24 w-auto transition-transform duration-300 hover:scale-110"
+          />
+        </Link>
 
-          {/* Mobile Menu */}
-          <div className="block lg:hidden">
-            <div className="flex items-center justify-between">
-              {/* Logo */}
-              <a href={logo.url} className="flex items-center gap-2">
-                <CirclePoundSterling className="text-blue-500 size-6" />
-                <span className="text-lg font-semibold tracking-tighter">
-                  {logo.title}
-                </span>
-              </a>
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline" size="icon">
-                    <Menu className="size-4" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent className="overflow-y-auto">
-                  <SheetHeader>
-                    <SheetTitle>
-                      <a href={logo.url} className="flex items-center gap-2">
-                        <CirclePoundSterling className="text-blue-500 size-6" />
-                        <span className="text-lg font-semibold tracking-tighter">
-                          {logo.title}
-                        </span>
-                      </a>
-                    </SheetTitle>
-                  </SheetHeader>
-                  <div className="flex flex-col gap-6 p-4">
-                    <Accordion
-                      type="single"
-                      collapsible
-                      className="flex w-full flex-col gap-4"
-                    >
-                      {menu.map((item) => renderMobileMenuItem(item))}
-                    </Accordion>
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex gap-10 text-black font-medium">
+          {menuItems.map((item) => (
+            <a
+              key={item.title}
+              href={item.url}
+              onClick={(e) => handleScroll(e, item.url)}
+              className="relative group cursor-pointer"
+            >
+              {item.title}
+              <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-pink-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          ))}
+        </nav>
 
-                    <div className="flex flex-col gap-3">
-                      <Button asChild variant="outline">
-                        <a href={auth.login.url}>{auth.login.title}</a>
-                      </Button>
-                      <Button asChild>
-                        <a href={auth.signup.url}>{auth.signup.title}</a>
-                      </Button>
-                    </div>
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </div>
-          </div>
+        {/* Mobile Menu */}
+        <div className="md:hidden">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon">
+                <Menu className="w-6 h-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="p-6">
+              <nav className="flex flex-col gap-6 text-lg font-medium">
+                {menuItems.map((item) => (
+                  <a
+                    key={item.title}
+                    href={item.url}
+                    onClick={(e) => handleScroll(e, item.url)}
+                    className="hover:text-pink-500 cursor-pointer"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
-      </section>
-
-      
-
-      
-
-      
-
-      
-
-     
-
-      
-    </>
-  );
-};
-
-const renderMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <NavigationMenuItem key={item.title}>
-        <NavigationMenuTrigger className="text-base">
-          {item.title}
-        </NavigationMenuTrigger>
-        <NavigationMenuContent className="bg-popover text-popover-foreground">
-          {item.items.map((subItem) => (
-            <NavigationMenuLink asChild key={subItem.title} className="w-80">
-              <SubMenuLink item={subItem} />
-            </NavigationMenuLink>
-          ))}
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    );
-  }
-
-  return (
-    <NavigationMenuItem key={item.title}>
-      <NavigationMenuLink
-        href={item.url}
-        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-base font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
-      >
-        {item.title}
-      </NavigationMenuLink>
-    </NavigationMenuItem>
-  );
-};
-
-const renderMobileMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <AccordionItem key={item.title} value={item.title} className="border-b-0">
-        <AccordionTrigger className="text-md py-0 font-semibold hover:no-underline">
-          {item.title}
-        </AccordionTrigger>
-        <AccordionContent className="mt-2">
-          {item.items.map((subItem) => (
-            <SubMenuLink key={subItem.title} item={subItem} />
-          ))}
-        </AccordionContent>
-      </AccordionItem>
-    );
-  }
-
-  return (
-    <a key={item.title} href={item.url} className="text-md font-semibold">
-      {item.title}
-    </a>
-  );
-};
-
-const SubMenuLink = ({ item }: { item: MenuItem }) => {
-  return (
-    <a
-      className="flex flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
-      href={item.url}
-    >
-      <div className="text-foreground">{item.icon}</div>
-      <div>
-        <div className="text-sm font-semibold">{item.title}</div>
-        {item.description && (
-          <p className="text-sm leading-snug text-muted-foreground">
-            {item.description}
-          </p>
-        )}
       </div>
-    </a>
+    </header>
   );
 };
 

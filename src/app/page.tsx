@@ -12,13 +12,7 @@ export default function Home() {
   return (
     <main className="w-full  flex flex-col items-center overflow-hidden ">
       <HeroSection />
-      <LogosSections />
       <MainFeatureSection />
-      <FeaturesSection />
-      <CTASection />
-      <TestimonialSection />
-      <FaqSection />
-      <FooterSection />
     </main>
   );
 }
