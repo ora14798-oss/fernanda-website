@@ -32,7 +32,7 @@ const MainFeatureSection = () => {
     <section className="relative w-screen py-28 overflow-hidden">
       
       {/* WHITE TOP LINE */}
-      <div className="absolute top-0 left-0 w-full h-2 bg-white z-20" />
+      <div className="absolute top-0 left-0 w-full h-1.5 bg-white z-20" />
 
       {/* BACKGROUND VIDEO */}
       <div className="absolute inset-0 -z-10 overflow-hidden">

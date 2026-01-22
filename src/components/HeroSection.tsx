@@ -146,9 +146,9 @@ const HeroSection = () => {
           }}
           className="flex items-center gap-3"
         >
-          <div className="h-1 w-20 bg-white rounded-full" />
-          <div className="text-white text-lg leading-none">∨</div>
-          <div className="h-1 w-20 bg-white rounded-full" />
+          <div className="h-1 w-20 bg-green-500 rounded-full" />
+          <div className="text-green-500 text-2xl font-black leading-none">∨</div>
+          <div className="h-1 w-20 bg-green-500 rounded-full" />
         </motion.div>
       </div>
 
