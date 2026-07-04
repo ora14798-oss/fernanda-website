@@ -65,7 +65,7 @@ const HeroSection = () => {
               transition={{ delay: 0.3 }}
               className="mt-4 max-w-md text-base text-white/90 sm:text-lg"
             >
-              Sí, escaneaste una camiseta.
+              hola soy fernanda.
               <br />
               Ahora conocés a Fernanda.
             </motion.p>
