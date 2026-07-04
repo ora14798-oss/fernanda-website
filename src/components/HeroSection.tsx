@@ -50,7 +50,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl font-extrabold uppercase leading-tight text-white sm:text-5xl md:text-6xl"
           >
-            HOLA, SOY SU MUJER   
+            HOLA soy fernanda   
             <br />
             Y ME LLAMAN 
             <br />
