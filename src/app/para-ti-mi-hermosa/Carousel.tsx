@@ -448,7 +448,7 @@ export function Carousel() {
 
         .pt-stage-wrap {
           position: relative;
-          width: min(92vw, calc((100dvh - 170px) * 0.8), 560px);
+          width: min(92vw, calc((100dvh - 180px) * 0.8), 560px);
           aspect-ratio: 4 / 5;
           height: auto;
           border-radius: 24px;
