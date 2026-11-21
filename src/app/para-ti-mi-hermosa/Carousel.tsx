@@ -448,9 +448,9 @@ export function Carousel() {
 
         .pt-stage-wrap {
           position: relative;
-          height: calc(100dvh - 140px);
-          width: calc((100dvh - 140px) * 0.8);
-          max-width: 92vw;
+          width: min(92vw, calc((100dvh - 170px) * 0.8), 560px);
+          aspect-ratio: 4 / 5;
+          height: auto;
           border-radius: 24px;
           box-shadow: 0 20px 55px rgba(0, 0, 0, 0.45);
         }
@@ -480,7 +480,7 @@ export function Carousel() {
         .pt-slide img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
           display: block;
         }
 
