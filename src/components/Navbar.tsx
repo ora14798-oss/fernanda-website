@@ -1,95 +1,70 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { Menu } from "lucide-react";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+
+const NAV_ITEMS = [
+  { title: "About Me", url: "#about-me" },
+  { title: "Model", url: "#model" },
+  { title: "Social Media Manager", url: "#social-media-manager" },
+  { title: "Contact", url: "#contact" },
+];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const menuItems = [
-    { title: "Home", url: "#herosection" },
-    { title: "About Us", url: "#about" },
-    { title: "Services", url: "#services" },
-    { title: "Testimonials", url: "#testimonials" },
-    { title: "Contact", url: "#contact" },
-  ];
-
-  // Function for smooth scroll with offset
   const handleScroll = (e: React.MouseEvent, target: string) => {
     e.preventDefault();
     const section = document.querySelector(target);
     if (section) {
-      const navbarHeight = 5; // slightly thinner navbar height
-      const sectionTop =
-        section.getBoundingClientRect().top + window.scrollY - navbarHeight;
-      window.scrollTo({ top: sectionTop, behavior: "smooth" });
+      const top = section.getBoundingClientRect().top + window.scrollY - 24;
+      window.scrollTo({ top, behavior: "smooth" });
     }
     setOpen(false);
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="container mx-auto flex items-center justify-between py-1 px-3">
-        {/* Logo */}
-        <Link
-          href="#hero"
-          onClick={(e) => handleScroll(e, "#hero")}
-          className="flex items-center -my-2"
-        >
-          <img
-            src="https://res.cloudinary.com/dqksqtluq/image/upload/v1759537067/ChatGPT_Image_Oct_3_2025_07_17_33_PM_uf1fo1.png"
-            alt="Dra. G Clínica Odontológica"
-            className="h-24 w-auto transition-transform duration-300 hover:scale-110"
-          />
-        </Link>
-
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex gap-10 text-black font-medium">
-          {menuItems.map((item) => (
+    <header className="fixed inset-x-0 top-3 z-50 flex justify-center px-4 md:top-6">
+      <nav className="flex w-full max-w-3xl items-center justify-between gap-1 rounded-full bg-white/95 px-2 py-2 shadow-lg backdrop-blur md:justify-center md:gap-2 md:px-3">
+        {/* Desktop */}
+        <div className="hidden w-full items-center justify-between md:flex">
+          {NAV_ITEMS.map((item) => (
             <a
               key={item.title}
               href={item.url}
               onClick={(e) => handleScroll(e, item.url)}
-              className="relative group cursor-pointer"
+              className="rounded-full px-5 py-2 text-sm font-semibold text-black/80 transition hover:bg-black/5 hover:text-black"
             >
               {item.title}
-              <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-pink-500 transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
-        </nav>
-
-        {/* Mobile Menu */}
-        <div className="md:hidden">
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon">
-                <Menu className="w-6 h-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="p-6">
-              <nav className="flex flex-col gap-6 text-lg font-medium">
-                {menuItems.map((item) => (
-                  <a
-                    key={item.title}
-                    href={item.url}
-                    onClick={(e) => handleScroll(e, item.url)}
-                    className="hover:text-pink-500 cursor-pointer"
-                  >
-                    {item.title}
-                  </a>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
         </div>
-      </div>
+
+        {/* Mobile toggle */}
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          className="ml-auto flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-black md:hidden"
+          aria-expanded={open}
+        >
+          Menu
+        </button>
+      </nav>
+
+      {/* Mobile dropdown */}
+      {open && (
+        <div className="absolute top-full mt-2 w-[calc(100%-2rem)] max-w-3xl rounded-2xl bg-white/95 p-2 shadow-lg backdrop-blur md:hidden">
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.title}
+              href={item.url}
+              onClick={(e) => handleScroll(e, item.url)}
+              className="block rounded-xl px-4 py-3 text-sm font-semibold text-black/80 hover:bg-black/5 hover:text-black"
+            >
+              {item.title}
+            </a>
+          ))}
+        </div>
+      )}
     </header>
   );
 };

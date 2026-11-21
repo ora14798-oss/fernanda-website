@@ -2,156 +2,136 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useContactRequest } from "@/context/ContactRequestContext";
+
+const PHOTO_URL = "/images/hero-right-image.jpeg";
+
+const CANDLES_PHOTO_URL = "/images/fernanda-candles.jpeg";
+
+const HERO_CONTACT_MESSAGE =
+  "Hi Fernanda, I saw your page and I'd like to get in touch with you.";
 
 const HeroSection = () => {
+  const { requestContact } = useContactRequest();
+
   return (
-    <section className="relative w-screen min-h-screen overflow-hidden bg-black">
-      
-      {/* 1️⃣ BASE DARK BACKGROUND */}
-      <div className="absolute inset-0 bg-black z-0" />
+    <section className="w-full bg-white px-3 md:px-6">
+      <div className="relative overflow-hidden rounded-[32px] bg-[#FF6A3D] px-6 pt-24 pb-12 md:px-16 md:pt-32 md:pb-20 md:min-h-[88vh]">
 
-      {/* 2️⃣ DARK OVERLAY */}
-      <div className="absolute inset-0 bg-black/60 z-10" />
+        {/* CONTENT GRID */}
+        <div className="relative z-10 grid gap-12 md:grid-cols-2 md:items-center">
 
-      {/* 3️⃣ WHITE LIGHT GLOW — UNDER PHOTO */}
-      <div
-        className="
-          pointer-events-none
-          absolute inset-0
-          z-20
-          bg-[radial-gradient(circle_at_85%_50%,rgba(255,255,255,0.45),rgba(255,255,255,0.25),rgba(255,255,255,0.08),transparent_60%)]
-        "
-      />
+          {/* LEFT: TEXT */}
+          <div className="text-left">
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="font-sans text-sm font-bold uppercase tracking-[0.25em] text-black/70"
+            >
+              Model &amp; Business Woman
+            </motion.p>
 
-      {/* 4️⃣ PHOTO — TOP VISUAL LAYER */}
-      <div
-        className="
-          absolute inset-0
-          z-30
-          bg-no-repeat
-          bg-right-top
-          bg-cover
-          md:bg-contain
-        "
-        style={{
-          backgroundImage:
-            "url('https://res.cloudinary.com/dvietxyfp/image/upload/v1768979162/FERNANDA_MARIA_ESCOBAR_MENDIETA_5_a9kctb.png')",
-        }}
-      />
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="font-[family-name:var(--font-heading)] uppercase leading-[0.9] text-black text-6xl sm:text-7xl md:text-8xl mt-3"
+            >
+              Fernanda
+              <br />
+              Escobar
+            </motion.h1>
 
-      {/* 5️⃣ CONTENT */}
-      <div className="relative z-40 flex min-h-screen items-start px-6 pt-24 md:px-16 md:pt-32">
-        <div className="max-w-xl text-left">
-          
-          {/* TITLE */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl font-extrabold uppercase leading-tight text-white sm:text-5xl md:text-6xl"
-          >
-            HOLA soy fernanda   
-            <br />
-            Y ME LLAMAN 
-            <br />
-            <span className="font-extrabold">FERNANDA</span>
-          </motion.h1>
+            <div className="mt-6 flex items-start gap-4">
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.35 }}
+                className="max-w-xs italic text-black/80 text-xl"
+              >
+                Style. Strategy. Empowerment.
+              </motion.p>
 
-          {/* DESKTOP SUBTEXT + BUTTON */}
-          <div className="hidden md:block">
+              <motion.svg
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="black"
+                strokeWidth="1.5"
+                className="mt-1 shrink-0"
+              >
+                <path d="M7 17L17 7M17 7H8M17 7V16" strokeLinecap="round" strokeLinejoin="round" />
+              </motion.svg>
+            </div>
+
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="mt-4 max-w-md text-base text-white/90 sm:text-lg"
+              transition={{ delay: 0.45 }}
+              className="mt-6 max-w-md text-lg text-black/70"
             >
-              hola soy fernanda.
-              <br />
-              Ahora conocés a Fernanda.
+              Model, content creator and digital strategist, helping
+              brands and individuals tell their story and shine on social
+              media.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="mt-6 flex flex-wrap gap-4"
+              transition={{ delay: 0.6 }}
+              className="mt-8"
             >
-              <a
-                href="https://wa.link/tn3jqy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white hover:brightness-110 transition"
+              <button
+                type="button"
+                onClick={() => requestContact("general", HERO_CONTACT_MESSAGE)}
+                className="inline-flex items-center justify-center rounded-full bg-black px-7 py-3 text-sm font-semibold text-white transition hover:bg-black/80"
               >
-                CONTACTAR POR WHATSAPP
-              </a>
+                CONTACT
+              </button>
+            </motion.div>
+          </div>
+
+          {/* RIGHT: PHOTO COLLAGE */}
+          <div className="relative flex flex-col items-center gap-6 md:flex-row md:items-center md:justify-end md:gap-0">
+            {/* Card 2 — candles photo, sits behind/left */}
+            <motion.div
+              initial={{ opacity: 0, y: 40, rotate: -10 }}
+              animate={{ opacity: 1, y: 0, rotate: -6 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="relative z-0 w-64 sm:w-80 md:w-[26rem] rounded-[24px] border-[10px] border-white bg-white shadow-2xl overflow-hidden md:mt-16 md:mr-[-6rem]"
+            >
+              <div
+                className="aspect-[4/5] w-full bg-white bg-no-repeat bg-cover grayscale"
+                style={{
+                  backgroundImage: `url('${CANDLES_PHOTO_URL}')`,
+                  backgroundPosition: "center 20%",
+                }}
+              />
+            </motion.div>
+
+            {/* Card 1 — main photo, sits in front/right */}
+            <motion.div
+              initial={{ opacity: 0, y: 40, rotate: 6 }}
+              animate={{ opacity: 1, y: 0, rotate: 3 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="relative z-10 w-64 sm:w-80 md:w-[26rem] rounded-[24px] border-[10px] border-white bg-white shadow-2xl overflow-hidden md:mr-[-2rem]"
+            >
+              <div
+                className="aspect-[4/5] w-full bg-white bg-no-repeat bg-cover grayscale"
+                style={{
+                  backgroundImage: `url('${PHOTO_URL}')`,
+                  backgroundPosition: "100% 20%",
+                }}
+              />
             </motion.div>
           </div>
         </div>
       </div>
-
-      {/* 📱 MOBILE BOTTOM CONTENT */}
-      <div className="md:hidden absolute bottom-[90px] left-0 right-0 z-40 px-6">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="mb-4 text-base text-white/90"
-        >
-          Sí, escaneaste una camiseta.
-          <br />
-          Ahora conocés a Fernanda.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="flex flex-col gap-3"
-        >
-          <a
-            href="https://wa.link/tn3jqy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white"
-          >
-            CONTACTAR POR WHATSAPP
-          </a>
-        </motion.div>
-      </div>
-
-      {/* ⬇️ SCROLL INDICATOR — ENHANCED */}
-      <div className="pointer-events-none absolute bottom-3 left-1/2 z-50 -translate-x-1/2 flex flex-col items-center gap-2">
-        
-        {/* Helper text */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="text-xs md:text-sm text-white/80 text-center max-w-[260px]"
-        >
-          Para ver más sobre mí y lo que estoy buscando, desliza hacia abajo
-        </motion.p>
-
-        {/* Animated indicator */}
-        <motion.div
-          animate={{
-            opacity: [0.4, 1, 0.4],
-            y: [0, 6, 0],
-            scale: [1, 1.06, 1],
-          }}
-          transition={{
-            duration: 1.6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="flex items-center gap-3"
-        >
-          <div className="h-1 w-20 bg-green-500 rounded-full" />
-          <div className="text-green-500 text-2xl font-black leading-none">∨</div>
-          <div className="h-1 w-20 bg-green-500 rounded-full" />
-        </motion.div>
-      </div>
-
     </section>
   );
 };

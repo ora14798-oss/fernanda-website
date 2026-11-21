@@ -1,18 +1,20 @@
-import { CTASection } from "@/components/CTASection";
-import { FaqSection } from "@/components/FAQSection";
-import { FeaturesSection } from "@/components/FeaturesSection";
-import { FooterSection } from "@/components/FooterSection";
-import { HeroSection } from "@/components/HeroSection";
-import { LogosSections } from "@/components/LogosSection";
-import { MainFeatureSection } from "@/components/MainFeatureSection";
-import { TestimonialSection } from "@/components/TestimonialSection";
-import Image from "next/image";
+// Temporary homepage: showing only the Carousel.
+// To restore the old homepage, import OldHome from "./_old-home/OldHome"
+// and render <OldHome /> instead of <Carousel />.
+import type { Metadata } from "next";
+import { Carousel } from "./para-ti-mi-hermosa/Carousel";
+
+export const metadata: Metadata = {
+  title: "Para ti, mi hermosa",
+  description: "🤍",
+  robots: { index: false, follow: false },
+  openGraph: {
+    title: "Para ti, mi hermosa",
+    description: "🤍",
+    images: ["/para-ti/cover.jpg"],
+  },
+};
 
 export default function Home() {
-  return (
-    <main className="w-full  flex flex-col items-center overflow-hidden ">
-      <HeroSection />
-      <MainFeatureSection />
-    </main>
-  );
+  return <Carousel />;
 }
